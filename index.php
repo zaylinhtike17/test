@@ -1,22 +1,43 @@
  <?php
     session_start();
     $auth =isset($_SESSION['auth']);
+    include("config.php");
 ?>
 <?php
-
+$result_per_page = 5; 
+if(!isset($_GET['page'])){
+            $page= 1;
+        }
+        else{
+            $page =$_GET['page'];
+        }
 if(isset($_POST['search'])) //for search
 {
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
+
     $query = "SELECT * FROM `register` WHERE CONCAT(`name`, `dob`, `education`,`skill`,`gender`,`dept`,`address`) LIKE '%".$valueToSearch."%'";
     $search_result = filterTable($query);
-    
-}
- else {
-    $query = "SELECT * FROM `register`";
-    $search_result = filterTable($query);
+    $number_of_result=mysqli_num_rows($search_result);   
+    $number_of_pages = 1;
+   
+      
+   
 
+}
+else {
+        
+        $sql="SELECT * FROM register";
+        $search_result=mysqli_query($conn,$sql);
+        $number_of_result=mysqli_num_rows($search_result);   
+        $number_of_pages = ceil($number_of_result/$result_per_page);
+        $page_first_result =($page-1)*$result_per_page;
+        $sql = "SELECT * FROM register LIMIT " . $page_first_result . ",". $result_per_page;
+        $search_result = mysqli_query($conn, $sql);
+        
+           
+        
 }
 
 // function to connect and execute the query
@@ -26,6 +47,8 @@ function filterTable($query)
     $filter_Result = mysqli_query($connect, $query);
     return $filter_Result;
 }
+        
+
 //end search
 ?>
 <?php if ($auth) {?>
@@ -63,8 +86,6 @@ function filterTable($query)
                     <th></th>
                     <th></th>
                 </tr>
-
-      <!-- populate table from mysql database -->
                 <?php while($row = mysqli_fetch_array($search_result)):?>
                 <tr>
                     <td><?php echo $row['name'];?></td>
@@ -74,13 +95,21 @@ function filterTable($query)
                     <td><?php echo $row['gender'];?></td>
                     <td><?php echo $row['dept'];?></td>
                     <td><?php echo $row['address'];?></td>
-                    <th>[<a href="delete.php?id=<?php echo $row['id']?>" class="delete">Delete</a>]</th>
+                    <th>[<a href="delete.php?id=<?php echo $row['id']?>"onClick="return confirm('are you sure you want to delete??');">Delete</a>]</th>
                     <th>[<a href="edit.php?id=<?php echo $row['id']?>">Edit</a>]</th>
                 </tr>
                 <?php endwhile;?>
+      <!-- populate table from mysql database -->
+            
+                
             </table>
         </form>
-        
+        <?php
+                for($page=1;$page<=$number_of_pages;$page++)
+                {
+                    echo '<a href ="index.php?page='. $page. '">'.$page. "</a>";
+                }
+        ?>
     </body>
 </html>
 <?php } else {?>
