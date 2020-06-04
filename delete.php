@@ -3,5 +3,5 @@
  $id = $_GET['id'];
  $sql = "DELETE FROM register WHERE id =$id";
  mysqli_query($conn, $sql);
- header("location: list.php");
+ header("location: index.php");
  ?>

@@ -9,5 +9,5 @@
  $address =$_POST['address'];
  $sql = "INSERT INTO register (name, dob, education, skill,gender,dept,address) VALUES ('$name','$birthday','$education','$skill','$gender','$department','$address')";
  mysqli_query($conn, $sql);
-header("location:list.php");
+header("location:index.php");
  ?>

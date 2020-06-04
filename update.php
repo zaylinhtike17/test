@@ -10,5 +10,5 @@
  $address =$_POST['address'];
  $sql = "UPDATE register SET name='$name', dob='$birthday', education='$education',skill='$skill', gender='$gender',dept='$department',address='$address' WHERE id=$id";
  mysqli_query($conn, $sql);
-header("location:list.php");
+header("location:index.php");
  ?>

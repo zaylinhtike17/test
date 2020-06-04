@@ -3,13 +3,13 @@
     $auth =isset($_SESSION['auth']);
 ?>
 <?php
-include("config.php");
-if(isset($_POST['search']))
+
+if(isset($_POST['search'])) //for search
 {
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
-    $query = "SELECT * FROM `register` WHERE CONCAT(`name`, `dob`, `education`,`skill`,`gender`,`department`, `address`) LIKE '%".$valueToSearch."%'";
+    $query = "SELECT * FROM `register` WHERE CONCAT(`name`, `dob`, `education`,`skill`,`gender`,`dept`,`address`) LIKE '%".$valueToSearch."%'";
     $search_result = filterTable($query);
     
 }
@@ -26,7 +26,7 @@ function filterTable($query)
     $filter_Result = mysqli_query($connect, $query);
     return $filter_Result;
 }
-
+//end search
 ?>
 <?php if ($auth) {?>
 <!DOCTYPE html>
