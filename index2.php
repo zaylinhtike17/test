@@ -1,33 +1,19 @@
- <?php
-    session_start();
-    $auth =isset($_SESSION['auth']);
-    include("config.php");
-?>
 
-<?php if ($auth) {?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PHP HTML TABLE DATA SEARCH</title>
-
+  <head>
+	<title>Live Data Search with Pagination in PHP using Ajax</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
-        <style>
-            table,tr,th,td
-            {
-                border: 1px solid black;
-            }
-        </style>
-    </head>
-    <body>
-        <form action="index.php" method="post">
-            <label for="uname" style="font-size: 20px; color: blue;">User Name:</label>
-            <label  for="username" style="font-size: 20px; color: blue;"><?php echo $_SESSION['user']?></label>
-            <a href="new.php" class="new" style="text-align: right; margin-left: 300px;">ADD NEW</a>
-            <a href="logout.php" class="new" style="display: inline; text-align: right; margin-left: 30px;">LOG OUT</a><br><br>
-        <div class="card">
-        
+  </head>
+  <body>
+    <br />
+    <div class="container">
+      <h3>Studend Rtgister</h3>
+      <br />
+      <div class="card">
+        <div class="card-header">Dynamic Data</div>
         <div class="card-body">
           <div class="form-group">
             <input type="text" name="search_box" id="search_box" class="form-control" placeholder="Type your search query here" />
@@ -37,7 +23,8 @@
           </div>
         </div>
       </div>
-    </body>
+    </div>
+  </body>
 </html>
 <script>
   $(document).ready(function(){
@@ -70,14 +57,4 @@
 
   });
 </script>
-<?php } else {?>
-<h1>Login</h1>
-<form action="login.php" method="post">
-    <label for="email">Email</label><br>
-    <input type="text" name="email" id="email"><br>
-    <label for="password">Password</label><br>
-    <input type="password" name="password" id="password"><br>
-    <input type="submit" value="login">
-    <button><a href="register.php" style="text-decoration: none;">Register</a></button>
-</form> 
-<?php } ?>
+
