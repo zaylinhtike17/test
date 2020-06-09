@@ -3,7 +3,15 @@ require_once("config.php");
 $db_handle = new DBController();
 
 if(!empty($_POST["submit"])) {
-    $query = "UPDATE register set name = '".$_POST["name"]."', dob = '".$_POST["dob"]."', education = '".$_POST["education"]."', skill = '".$_POST["skill"]."' , gender = '".$_POST["gender"]."',dept = '".$_POST["department"]."', address = '".$_POST["address"]."' WHERE  id=".$_GET["id"];
+	$name = $_POST['name'];
+ 	$dob =$_POST['dob'];
+	$education =$_POST['education'];
+ 	$skill =implode(',',$_POST['skill']);
+ 	$gender =$_POST['gender'];
+ 	$dept =$_POST['department'];
+ 	$address =$_POST['address']; 
+
+    $query = "UPDATE register set name ='$name',dob='$dob', education='$education', skill='$skill',gender='$gender',dept='$dept', address='$address' WHERE  id=".$_GET["id"];
     $result = $db_handle->executeQuery($query);
 	if(!$result){
 		$message = "Problem in Editing! Please Retry!";
@@ -78,10 +86,10 @@ $b=explode(",",$a);
 <div>
 <label>Skills</label> 
 <span id="skill-info" class="info"></span>
-<input type="checkbox" name="skill" id="skill" class="demoInputBox" value="PHP" <?php if(in_array("PHP",$b)){ echo "checked";}?> >PHP
-<input type="checkbox" name="skill" id="skill" class="demoInputBox" value="Javascript" <?php if(in_array("Javascript",$b)){ echo "checked";}?> >Javascript
-<input type="checkbox" name="skill" id="skill" class="demoInputBox" value="CSS" <?php if(in_array("CSS",$b)){ echo "checked";}?> >CSS
-<input type="checkbox" name="skill" id="skill" class="demoInputBox" value="MySQL" <?php if(in_array("MySQL",$b)){ echo "checked";}?> >MySQL
+<input type="checkbox" name="skill[]" id="skill" class="demoInputBox" value="PHP" <?php if(in_array("PHP",$b)){ echo "checked";}?> >PHP
+<input type="checkbox" name="skill[]" id="skill" class="demoInputBox" value="Javascript" <?php if(in_array("Javascript",$b)){ echo "checked";}?> >Javascript
+<input type="checkbox" name="skill[]" id="skill" class="demoInputBox" value="CSS" <?php if(in_array("CSS",$b)){ echo "checked";}?> >CSS
+<input type="checkbox" name="skill[]" id="skill" class="demoInputBox" value="MySQL" <?php if(in_array("MySQL",$b)){ echo "checked";}?> >MySQL
 </div>
 <div>
 <label>Gemder</label> 
@@ -91,7 +99,7 @@ $b=explode(",",$a);
 </div>
 <div>
 <label>Department</label> 
-<span id="gender-info" class="info"></span>
+<span id="department-info" class="info"></span>
 <select name="department" id="department">
   		<option value="system" <?php if($result[0]['dept']=='system'){ echo "selected";}?>>System Team</option>
   		<option value="design" <?php if($result[0]['dept']=='design'){ echo "selected";}?>>Design Team</option>
