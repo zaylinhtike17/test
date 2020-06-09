@@ -10,14 +10,14 @@
   $db_handle = new DBController();
   
   $name = "";
-  $skill = "";
+  $dept = "";
   
   $queryCondition = "";
   if(!empty($_POST["search"])) {
     foreach($_POST["search"] as $k=>$v){
       if(!empty($v)) {
 
-        $queryCases = array("name","skill");
+        $queryCases = array("name","dept");
         if(in_array($k,$queryCases)) {
           if(!empty($queryCondition)) {
             $queryCondition .= " AND ";
@@ -30,9 +30,9 @@
           $name = $v;
           $queryCondition .= "name LIKE '" . $v . "%'";
           break;
-          case "skill":
-          $skill = $v;
-          $queryCondition .= "skill LIKE '" . $v . "%'";
+          case "dept":
+          $dept = $v;
+          $queryCondition .= "dept LIKE '" . $v . "%'";
           break;
         }
       }
@@ -94,7 +94,7 @@
         <div id="toys-grid">      
           <form name="frmSearch" method="post" action="index2.php">
             <div class="search-box">
-              <p><input type="text" placeholder="Name" name="search[name]" class="demoInputBox" value="<?php echo $name; ?>"  /><br><br><input type="text" placeholder="Skills" name="search[skill]" class="demoInputBox" value="<?php echo $skill; ?>" /><br><br><input type="submit" name="go" class="btnSearch" value="Search"><input type="reset" class="btnSearch" value="Reset" onclick="window.location='index2.php'"></p>
+              <p><input type="text" placeholder="Name" name="search[name]" class="demoInputBox" value="<?php echo $name; ?>"  /><br><br><input type="text" placeholder="Dept" name="search[dept]" class="demoInputBox" value="<?php echo $dept; ?>" /><br><br><input type="submit" name="go" class="btnSearch" value="Search"><input type="reset" class="btnSearch" value="Reset" onclick="window.location='index2.php'"></p>
             </div>
 
             <table cellpadding="10" cellspacing="1">
