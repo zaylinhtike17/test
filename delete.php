@@ -1,7 +1,11 @@
 <?php
- include("config.php");
- $id = $_GET['id'];
- $sql = "DELETE FROM register WHERE id =$id";
- mysqli_query($conn, $sql);
- header("location: index.php");
- ?>
+require_once("config.php");
+$db_handle = new DBController();
+if(!empty($_GET["id"])) {
+    $query = "DELETE FROM register WHERE id=".$_GET["id"];
+    $result = $db_handle->executeQuery($query);
+	if(!empty($result)){
+		header("Location:index2.php");
+	}
+}
+?>
