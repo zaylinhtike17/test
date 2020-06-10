@@ -125,7 +125,7 @@
                         <td><?php echo $result[$k]["dept"]; ?></td> 
                         <td><?php echo $result[$k]["address"]; ?></td> 
                         <td>
-                          <a class="btnEditAction" href="edit.php?id=<?php echo $result[$k]["id"]; ?>">Edit</a> <a class="btnDeleteAction" href="delete.php?action=delete&id=<?php echo $result[$k]["id"]; ?>">Delete</a>
+                          <a class="btnEditAction" href="edit.php?id=<?php echo $result[$k]["id"]; ?>">Edit</a> <a class="btnDeleteAction" href="delete.php?action=delete&id=<?php echo $result[$k]["id"]; ?>" onClick="return confirm('are you sure you want to delete??');">Delete</a>
                         </td>
                       </tr>
 
